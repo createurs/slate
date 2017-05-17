@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const archiver = require('archiver');
+
+module.exports = (function() {
+  const output = fs.createWriteStream('upload/slate-dist.zip');
+  const archive = archiver('zip');
+
+  output.on('close', () => {
+    console.log(`slate-dist.zip: ${archive.pointer()} total bytes`);
+  });
+
+  archive.on('error', (err) => {
+    throw err;
+  });
+
+  archive.pipe(output);
+
+  archive.directory('dist');
+
+  archive.finalize();
+})();

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const buildDistZip = require('./build/dist-zip');
+const buildSrcZip = require('./build/src-zip');
+
+module.exports = (
+  buildDistZip,
+  buildSrcZip
+);
